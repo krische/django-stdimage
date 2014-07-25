@@ -136,9 +136,15 @@ class StdImageField(ImageField):
         self.min_size = {'width': 0, 'height': 0}
         self.max_size = {'width': float('inf'), 'height': float('inf')}
 
-        for key, attr in variations.iteritems():
+        # workaround for Python3 support, dict uses items() instead of iteritems()
+        if hasattr(variations, 'iteritems'):
+            variation_items = variations.iteritems()
+        else:
+            variation_items = variations.items()
+
+        for key, attr in variation_items:
             if attr and isinstance(attr, (tuple, list)):
-                variation = dict(map(None, param_size, attr))
+                variation = dict(zip(param_size, attr))
                 variation['name'] = key
                 setattr(self, key, variation)
                 self.variations.append(variation)
