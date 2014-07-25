@@ -1,11 +1,21 @@
 # -*- coding: utf-8 -*-
 import os
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 DATABASE_ENGINE = 'sqlite3'
 DATABASE_NAME = 'testproject.db'
+
+# Django 1.4+ style of config
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'testproject.db'),
+    }
+}
 
 TIME_ZONE = 'America/Chicago'
 
