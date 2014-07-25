@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
-from cStringIO import StringIO
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from io import StringIO
 from django.db.models import signals
 from django.db.models.fields.files import ImageField, ImageFileDescriptor, ImageFieldFile
 from django.core.files.base import ContentFile
@@ -14,9 +17,9 @@ except ImportError:
     import Image, ImageOps
 
 
-from forms import StdImageFormField
-from widgets import DelAdminFileWidget
-from utils import upload_to_class_name_dir, upload_to_class_name_dir_uuid, upload_to_uuid
+from .forms import StdImageFormField
+from .widgets import DelAdminFileWidget
+from .utils import upload_to_class_name_dir, upload_to_class_name_dir_uuid, upload_to_uuid
 
 UPLOAD_TO_CLASS_NAME = upload_to_class_name_dir
 UPLOAD_TO_CLASS_NAME_UUID = upload_to_class_name_dir_uuid
